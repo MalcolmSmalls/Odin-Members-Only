@@ -2,9 +2,11 @@ extends layout
 
 block content
 
-  form(method="POST" action="")
-    label(for='email') E-mail:
+  form(method="POST" action="group/user/create")
+    label(for='username') Username:
+    input(type='text', name='username' id='username')
 
+    label(for='email') E-mail:
     input(type='email', placeholder="address@email.com" name='email' id='email')
 
 

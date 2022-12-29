@@ -1,41 +1,55 @@
 const User = require("../models/user");
 
-// Display list of all users.
-exports.user_list = (req, res) => {
-  res.send("NOT IMPLEMENTED: user list");
-};
 
-// Display detail page for a specific user.
-exports.user_detail = (req, res) => {
-  res.send(`NOT IMPLEMENTED: user detail: ${req.params.id}`);
-};
+// CREATE
 
-// Display user create form on GET.
 exports.user_create_get = (req, res) => {
-  res.send("NOT IMPLEMENTED: user create GET");
-};
+    res.send("NOT IMPLEMENTED: user create GET");
+  };
 
-// Handle user create on POST.
-exports.user_create_post = (req, res) => {
-  res.send("NOT IMPLEMENTED: user create POST");
-};
+  exports.user_create_post = (req, res, next) => {
 
-// Display user delete form on GET.
+	const user = new User ({
+		username: req.body.username,
+		email: req.body.email,
+		password: req.body.password,
+	}).save(err => {
+		if(err) {
+			return next(err)
+		}
+	res.redirect("/")
+	});
+  };
+
+// READ
+
+exports.user_detail = (req, res) => {
+    res.send(`NOT IMPLEMENTED: user detail: ${req.params.id}`);
+  };
+  
+
+exports.user_list = (req, res) => {
+    res.send("NOT IMPLEMENTED: user list");
+  };
+
+// UPDATE
+
+exports.user_update_get = (req, res) => {
+    res.send("NOT IMPLEMENTED: user update GET");
+  };
+  
+  exports.user_update_post = (req, res) => {
+    res.send("NOT IMPLEMENTED: user update POST");
+  };
+
+// DELETE
+
 exports.user_delete_get = (req, res) => {
   res.send("NOT IMPLEMENTED: user delete GET");
 };
 
-// Handle user delete on POST.
+
 exports.user_delete_post = (req, res) => {
   res.send("NOT IMPLEMENTED: user delete POST");
 };
 
-// Display user update form on GET.
-exports.user_update_get = (req, res) => {
-  res.send("NOT IMPLEMENTED: user update GET");
-};
-
-// Handle user update on POST.
-exports.user_update_post = (req, res) => {
-  res.send("NOT IMPLEMENTED: user update POST");
-};
