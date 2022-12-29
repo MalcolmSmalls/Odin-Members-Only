@@ -11,7 +11,7 @@ const CommentSchema = new Schema ({
 })
 
 CommentSchema.virtual("url").get(function () {
-    return `comment/${this.id}`;
+    return `group/comment/${this.id}`;
 })
 
 // CommentSchema.virtual("formatted_Date").get(function(){

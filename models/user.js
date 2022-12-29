@@ -11,7 +11,7 @@ const UserSchema = new Schema ({
 })
 
 CommentSchema.virtual("url").get(function () {
-    return `user/${this.id}`;
+    return `group/user/${this.id}`;
 })
 
 
