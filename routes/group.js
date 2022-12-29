@@ -5,6 +5,9 @@ const commentController = require('../controllers/commentController')
 const userController = require('../controllers/userController')
 
 
+
+router.get('/', commentController.index)
+
 ///// COMMENT
 
 // CREATE
@@ -67,3 +70,5 @@ router.post("/user/:id/update", userController.user_update_post);
 router.get("/user/:id/update", userController.user_delete_get);
 
 router.post("/user/:id/update", userController.user_delete_post);
+
+module.exports = router;

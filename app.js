@@ -8,6 +8,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const indexRouter = require('./routes/index')
+const groupRouter = require('./routes/group')
 
 const mongoDb = process.env.MONGO
 
@@ -15,8 +16,8 @@ mongoose.connect(mongoDb, { useUnifiedTopology: true, useNewUrlParser: true });
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "mongo connection error"));
 
-const User = mongoose.model(
-  "User",
+const Member = mongoose.model(
+  "Member",
   new Schema({
     username: { type: String, required: true },
     password: { type: String, required: true }
@@ -35,6 +36,7 @@ app.use(express.urlencoded({ extended: false }));
 // app.get("/", (req, res) => res.render("index"));
 
 app.use('/', indexRouter)
+app.use("/group", groupRouter)
 app.get("/sign-up", (req, res) => res.render("sign-up-form"));
 
 app.listen(3000, () => console.log("app listening on port 3000!"));

@@ -1,5 +1,13 @@
 const Comment = require("../models/comment");
 
+
+exports.index = (req, res) => {
+    res.render('index', {
+        title: 'Secret Group'
+    })
+}
+
+
 // Display list of all comments.
 exports.comment_list = (req, res) => {
   res.send("NOT IMPLEMENTED: comment list");

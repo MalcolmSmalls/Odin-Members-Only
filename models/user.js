@@ -10,7 +10,7 @@ const UserSchema = new Schema ({
     dateJoined: { type: Date, default: Date.now }
 })
 
-CommentSchema.virtual("url").get(function () {
+UserSchema.virtual("url").get(function () {
     return `group/user/${this.id}`;
 })
 
