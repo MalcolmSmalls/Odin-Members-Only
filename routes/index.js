@@ -4,7 +4,7 @@ const router = express.Router()
 
 
 router.get("/", (req, res, next) => {
-    res.render("index", { title: "Log-In" });
+    res.render("log-in-form", { title: "Log-In" });
   });
 
 

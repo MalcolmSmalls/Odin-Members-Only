@@ -1,0 +1,18 @@
+extends layout 
+
+block content
+
+  form(method="POST" action="")
+    label(for='email') E-mail:
+
+    input(type='email', placeholder="address@email.com" name='email' id='email')
+
+
+    label(for='pass') Password:
+    input(type='password', name='password' id='pass')
+
+    label(for='key') Secret Key:
+    input(type='password', name='key' id="key")
+
+
+    button(type='submit') Sign Up

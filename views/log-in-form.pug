@@ -1,0 +1,15 @@
+extends layout 
+
+block content
+  h1= title
+  form(method="POST" action="log-in")
+    label(for='email') E-mail:
+
+    input(type='email', placeholder="address@email.com" name='name' id="email")
+
+
+    label(for='pass') Password:
+    input(type='password', name='password' id="pass")
+
+
+    button(type='submit') Log In
