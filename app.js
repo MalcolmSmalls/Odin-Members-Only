@@ -6,6 +6,7 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const User = require("./models/user");
 
 const indexRouter = require('./routes/index')
 const groupRouter = require('./routes/group')
@@ -38,5 +39,46 @@ app.use(express.urlencoded({ extended: false }));
 app.use('/', indexRouter)
 app.use("/group", groupRouter)
 app.get("/sign-up", (req, res) => res.render("sign-up-form"));
+
+passport.serializeUser(function(user,done) {
+	done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+	User.findById(id, function(err, user) {
+		done(err, user);
+	});
+});
+
+passport.use(
+	new LocalStrategy((username, password, done) => {
+		User.findOne({ username: username}, (err, user) => {
+			if(err){
+				return done(err);
+			}
+			if (!user) {
+                console.log("wrong email")
+				return done(null, false, { message: "Incorrect username" });
+			}
+			if (user.password !== password){
+                console.log("wrong password")
+				return done(null, false, { message: "Incorrect password" });
+			}
+			return done (null, user)
+		});
+	})
+);
+
+app.post(
+	"/log-in",
+	passport.authenticate("local", {
+		successRedirect: "/group",
+		failureRedirect: "/"
+	})
+);
+
+app.get("/", (req, res) => {
+    res.render("group", { user: req.user });
+  });
 
 app.listen(3000, () => console.log("app listening on port 3000!"));

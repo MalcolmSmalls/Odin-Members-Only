@@ -2,10 +2,10 @@ extends layout
 
 block content
   h1= title
-  form(method="POST" action="log-in")
-    label(for='email') E-mail:
+  form(method="POST" action="/log-in")
+    label(for='username') Username:
 
-    input(type='email', placeholder="address@email.com" name='name' id="email")
+    input(type='text', name='username' id="username")
 
 
     label(for='pass') Password:
