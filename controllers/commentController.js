@@ -3,7 +3,8 @@ const Comment = require("../models/comment");
 
 exports.index = (req, res) => {
     res.render('index', {
-        title: 'Secret Group'
+        title: 'Secret Group',
+        user: req.user
     })
 }
 

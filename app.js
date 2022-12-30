@@ -24,15 +24,24 @@ db.on("error", console.error.bind(console, "mongo connection error"));
 //     password: { type: String, required: true }
 //   })
 // );
-
 const app = express();
-app.set("views", path.join( __dirname, 'views'));
-app.set("view engine", "pug");
 
 app.use(session({ secret: "cats", resave: false, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
+
+
+
+app.use(function(req,res, next) {
+	res.locals.currentUser = req.user;
+	next();
+});
+
+
+app.set("views", path.join( __dirname, 'views'));
+app.set("view engine", "pug");
+
 
 // app.get("/", (req, res) => res.render("index"));
 
@@ -72,13 +81,25 @@ passport.use(
 app.post(
 	"/log-in",
 	passport.authenticate("local", {
-		successRedirect: "/group",
+		successRedirect: "/",
 		failureRedirect: "/"
 	})
 );
 
-app.get("/", (req, res) => {
-    res.render("group", { user: req.user });
-  });
+
+app.get("/log-out", (req, res, next) => {
+	req.logout(function (err) {
+		if (err) {
+			return next(err);
+		}
+		res.redirect("/");
+
+	});
+});
+
+
+// app.get("/group", (req, res) => {
+//     res.render("index", { user: req.user });
+//   });
 
 app.listen(3000, () => console.log("app listening on port 3000!"));

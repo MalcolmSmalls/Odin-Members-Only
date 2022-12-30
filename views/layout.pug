@@ -7,9 +7,14 @@ html
     nav
       ul
         li
-          a(href='/') Home
+          if(currentUser)
+            a(href='/group') Home
+          else 
+            a(href='/') Home
         li
           a(href='/sign-up') Sign Up
-      if user
-        span user
+        if(currentUser)
+            li
+                a(href='/log-out') Log Out
+
     block content
